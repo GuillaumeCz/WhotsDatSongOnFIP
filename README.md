@@ -5,3 +5,5 @@ Just ask for it ! ;)
 ```
 python3 index.py
 ```
+
+And the magic occurs ! :D
