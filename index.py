@@ -1,13 +1,14 @@
-
 import argparse
+
 import requests
 from bs4 import BeautifulSoup
 
-url = 'https://www.fip.fr/'
+url = "https://www.fip.fr/"
 req = requests.get(url).text
 soup = BeautifulSoup(req, "lxml")
 
-class Song():
+
+class Song:
     def __init__(self, title, artist, album="", label=""):
         self.title = title
         self.artist = artist
@@ -16,8 +17,12 @@ class Song():
 
     def __str__(self):
         # if not self.album ....
-        return "Title: % s \nArtist: % s \nAlbum: % s \nLabel: % s \n" % (self.title, self.artist,
-                self.album, self.label)
+        return "Title: % s \nArtist: % s \nAlbum: % s \nLabel: % s \n" % (
+            self.title,
+            self.artist,
+            self.album,
+            self.label,
+        )
 
 
 def get_current_song():
@@ -27,6 +32,7 @@ def get_current_song():
     current_label = soup.find_all("span", class_="now-info-details-value")[1].get_text()
 
     return Song(current_title, current_artist, current_album, current_label)
+
 
 def get_next_song():
     next_song_info = soup.find_all("div", class_="history-list-item-info")[2].contents
@@ -53,14 +59,17 @@ def output_current():
     song = get_current_song()
     print(song)
 
+
 def output_next():
     song = get_next_song()
     print(song)
+
 
 def output_previous():
     songs = get_previous_songs()
     for song in songs:
         print(song)
+
 
 def output_playlist():
     print("=!= Current =!=")
@@ -70,13 +79,18 @@ def output_playlist():
     print("\n=!= Previous =!=")
     output_previous()
 
+
 # output_playlist()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-c", "--current", help="display current song", action="store_true")
+    parser.add_argument(
+        "-c", "--current", help="display current song", action="store_true"
+    )
     parser.add_argument("-n", "--next", help="display next song", action="store_true")
-    parser.add_argument("-p", "--previous", help="display previous song", action="store_true")
+    parser.add_argument(
+        "-p", "--previous", help="display previous song", action="store_true"
+    )
     args = parser.parse_args()
 
     if args.current:
