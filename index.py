@@ -1,7 +1,9 @@
 import argparse
 
 import requests
+
 from bs4 import BeautifulSoup
+
 
 url = "https://www.fip.fr/"
 req = requests.get(url).text
