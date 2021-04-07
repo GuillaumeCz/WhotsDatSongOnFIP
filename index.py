@@ -1,4 +1,5 @@
 
+import argparse
 import requests
 from bs4 import BeautifulSoup
 
@@ -69,4 +70,18 @@ def output_playlist():
     print("\n=!= Previous =!=")
     output_previous()
 
-output_playlist()
+# output_playlist()
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-c", "--current", help="display current song", action="store_true")
+    parser.add_argument("-n", "--next", help="display next song", action="store_true")
+    parser.add_argument("-p", "--previous", help="display previous song", action="store_true")
+    args = parser.parse_args()
+
+    if args.current:
+        output_current()
+    if args.next:
+        output_next()
+    if args.previous:
+        output_previous()
