@@ -4,7 +4,7 @@ Just ask for it ! ;)
 
 ```
 poetry shell
-poetry install
+make install
 
 python index.py
 ```
